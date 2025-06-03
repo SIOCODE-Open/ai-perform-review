@@ -1,0 +1,9 @@
+id: meaningful-rule-names
+scope: file
+severity: high
+statement: |
+  Review rule ids should be meaningful, short and practically be a synonym for the statement.
+include:
+  - .ai/*.review.rule.yaml
+  - .ai/*.review.rule.yml
+  - .ai/*.review.rule.json
