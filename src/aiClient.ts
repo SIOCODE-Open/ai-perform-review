@@ -22,15 +22,48 @@ export class AIClient {
   private providers = new Map<ProviderName, any>();
 
   constructor() {
-    const cfgFile = path.join(os.homedir(), '.ai', 'review', 'credentials.json');
-    const cfgs: ProviderConfig[] = JSON.parse(fs.readFileSync(cfgFile, 'utf-8'));
-    for (const c of cfgs) {
-      if (c.provider === 'openai')
-        this.providers.set('openai', new OpenAI({ apiKey: c.credentials.apiKey }));
-      if (c.provider === 'gemini')
-        this.providers.set('gemini', new GoogleGenerativeAI(c.credentials.apiKey));
+    // Try environment variables first
+    const envOpenAI = process.env.OPENAI_API_KEY;
+    const envGemini = process.env.GEMINI_API_KEY;
+
+    if (envOpenAI) {
+      this.providers.set('openai', new OpenAI({ apiKey: envOpenAI }));
     }
-    if (!this.providers.size) throw new Error('No AI provider configured.');
+    if (envGemini) {
+      this.providers.set('gemini', new GoogleGenerativeAI(envGemini));
+    }
+
+    // Then try config file if needed
+    if (!this.providers.size) {
+      const cfgFile = path.join(os.homedir(), '.ai', 'review', 'credentials.json');
+      let cfgs: ProviderConfig[] = [];
+      
+      try {
+        cfgs = JSON.parse(fs.readFileSync(cfgFile, 'utf-8'));
+      } catch (err: any) {
+        if ((err as NodeJS.ErrnoException).code !== 'ENOENT') {
+          throw new Error(`Failed to read credentials file: ${err.message}`);
+        }
+        // File doesn't exist - continue with empty config
+      }
+
+      for (const c of cfgs) {
+        if (c.provider === 'openai' && !this.providers.has('openai')) {
+          this.providers.set('openai', new OpenAI({ apiKey: c.credentials.apiKey }));
+        }
+        if (c.provider === 'gemini' && !this.providers.has('gemini')) {
+          this.providers.set('gemini', new GoogleGenerativeAI(c.credentials.apiKey));
+        }
+      }
+    }
+
+    if (!this.providers.size) {
+      throw new Error(
+        'No AI providers configured. Please either:\n' +
+        '1. Set OPENAI_API_KEY or GEMINI_API_KEY environment variables, or\n' +
+        '2. Create a credentials file at ~/.ai/review/credentials.json'
+      );
+    }
   }
 
   async evaluate(

@@ -16,7 +16,7 @@ export function getCommits(
   base: string,
   branch: string
 ): CommitMeta[] {
-  const raw = git(dir, `log --pretty=format:%H|%at|%s ${remote}/${base}..${branch}`);
+  const raw = git(dir, `log --pretty="format:%H|%at|%s" ${remote}/${base}..${branch}`);
   if (!raw.trim()) return [];
   return raw.split('\n').map((l) => {
     const [h, ts, msg] = l.split('|');
