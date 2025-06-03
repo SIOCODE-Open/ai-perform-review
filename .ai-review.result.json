@@ -1,8 +1,14 @@
 [
   {
     "severity": "high",
+    "ruleId": "meaningful-rule-names",
+    "file": ".ai/a17.review.rule.yaml",
+    "message": "The review rule id 'a17' is not meaningful or indicative of the rule's purpose. It should be a short, descriptive synonym for the statement, such as 'no-console-logging' or 'use-logging-library'."
+  },
+  {
+    "severity": "high",
     "ruleId": "a17",
     "file": "src/reviewEngine.ts",
-    "message": "The content contains multiple instances of using the `console` object for logging. The rule specifies to avoid using the `console` object for logging and instead use a logging library. Consider refactoring the code to replace `console.log` statements with a logging library to adhere to the rule."
+    "message": "The content contains multiple instances where the `console` object is used for logging (e.g., `console.log`). According to the specified rule, a logging library should be used instead of the `console` object for logging purposes. This change would typically involve replacing `console.log` statements with calls to a logging library that can handle different logging levels and outputs more efficiently."
   }
 ]
