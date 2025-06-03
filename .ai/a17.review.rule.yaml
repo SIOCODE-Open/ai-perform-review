@@ -1,0 +1,10 @@
+id: a17
+scope: file
+statement: "Avoid using the `console` object for logging. Use a logging library instead."
+severity: high
+include:
+  - "**/*.js"
+  - "**/*.ts"
+  - "**/*.jsx"
+  - "**/*.tsx"
+  - "**/*.mjs"
