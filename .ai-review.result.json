@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "severity": "high",
+    "ruleId": "a17",
+    "file": "src/reviewEngine.ts",
+    "message": "The content contains multiple instances of using the `console` object for logging. The rule specifies to avoid using the `console` object for logging and instead use a logging library. Consider refactoring the code to replace `console.log` statements with a logging library to adhere to the rule."
+  }
+]

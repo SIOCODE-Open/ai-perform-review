@@ -2,7 +2,7 @@ id: meaningful-rule-names
 scope: file
 severity: high
 statement: |
-  Review rule ids should be meaningful, short and practically be a synonym for the statement.
+  Review rule ids should be meaningful, short and practically be a synonym for the statement. Avoid names like my-rule or r0000.
 include:
   - .ai/*.review.rule.yaml
   - .ai/*.review.rule.yml
