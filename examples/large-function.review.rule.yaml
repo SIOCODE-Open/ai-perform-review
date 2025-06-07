@@ -1,0 +1,9 @@
+id: large-function
+scope: file
+severity: high
+statement: "Functions should not exceed 50 lines to maintain readability."
+include:
+  - "**/*.js"
+  - "**/*.ts"
+  - "**/*.jsx"
+  - "**/*.tsx"

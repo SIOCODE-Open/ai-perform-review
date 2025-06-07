@@ -1,0 +1,11 @@
+id: no-console
+scope: file
+severity: medium
+statement: "Avoid using the `console` object for logging. Use a proper logging library instead."
+include:
+  - "**/*.js"
+  - "**/*.ts"
+  - "**/*.jsx"
+  - "**/*.tsx"
+matchInclude:
+  - "console\\."

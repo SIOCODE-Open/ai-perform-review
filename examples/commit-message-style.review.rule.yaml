@@ -1,0 +1,4 @@
+id: commit-message-style
+scope: history
+severity: medium
+statement: "Commit messages should be concise and written in the imperative mood. Keep the summary under 72 characters."

@@ -1,0 +1,8 @@
+id: test-file-name
+scope: file
+severity: medium
+statement: "Test files should be named with the `.spec.ts` suffix."
+include:
+  - "tests/**/*.ts"
+exclude:
+  - "**/*.spec.ts"

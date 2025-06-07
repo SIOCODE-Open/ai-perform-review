@@ -1,0 +1,8 @@
+id: no-todo
+scope: inline
+severity: low
+statement: "TODO comments should be resolved before merging."
+include:
+  - "**/*"
+matchInclude:
+  - "TODO"
